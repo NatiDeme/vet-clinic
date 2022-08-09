@@ -12,3 +12,15 @@ SELECT * FROM public.animals
 
 SELECT date_of_birth FROM public.animals
   WHERE name = 'Agumon' OR name = 'Pikachu'
+
+SELECT name, escape_attempts FROM public.animals
+  WHERE weight_kg > 10.5
+
+SELECT * FROM public.animals
+  WHERE neutered = true
+
+SELECT * FROM public.animals
+  WHERE name != 'Gabumon'
+
+SELECT * FROM public.animals
+  WHERE weight_kg >= 10.4 and weight_kg <= 17.3
