@@ -1,26 +1,34 @@
 /*Queries that provide answers to the questions from all projects.*/
 
+BEGIN;
+ DELETE FROM animals
+ WHERE date_of_birth > '2022-01-01';
 
-SELECT * FROM public.animals
-    WHERE name like '%mon'
+SAVEPOINT first_savepoint;
 
-SELECT * FROM public.animals
-    WHERE date_of_birth between '2016-01-01' and '2019-12-31'
+UPDATE animals 
+SET weight_kg = weight_kg * -1;
 
-SELECT * FROM public.animals
-    WHERE neutered = true and escape_attempts < 3
+ROLLBACK TO first_savepoint;
 
-SELECT date_of_birth FROM public.animals
-  WHERE name = 'Agumon' OR name = 'Pikachu'
+UPDATE animals 
+SET weight_kg = weight_kg * -1
+WHERE weight_kg < 0;
 
-SELECT name, escape_attempts FROM public.animals
-  WHERE weight_kg > 10.5
+COMMIT;
 
-SELECT * FROM public.animals
-  WHERE neutered = true
+SELECT COUNT(*) FROM animals;
 
-SELECT * FROM public.animals
-  WHERE name != 'Gabumon'
+SELECT COUNT(*) FROM animals
+WHERE escape_attempts = 0;
 
-SELECT * FROM public.animals
-  WHERE weight_kg >= 10.4 and weight_kg <= 17.3
+SELECT AVG(weight_kg) FROM animals;
+
+SELECT neutered , SUM(escape_attempts) FROM animals
+GROUP BY neutered;
+
+SELECT MIN(weight_kg), MAX(weight_kg) FROM animals;
+
+SELECT AVG(escape_attempts) FROM animals
+WHERE date_of_birth BETWEEN '1990-01-01' AND '2000-12-31';
+
