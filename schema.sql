@@ -1,6 +1,6 @@
 /* Database schema to keep the structure of entire database. */
 
-CREATE TABLE animals (
+CREATE TABLE woners (
     id INT GENERATED ALWAYS AS IDENTITY,
     full_name VARCHAR(50),
     age integer
