@@ -1,34 +1,28 @@
 /*Queries that provide answers to the questions from all projects.*/
 
-BEGIN;
- DELETE FROM animals
- WHERE date_of_birth > '2022-01-01';
+select * from animals
+    inner join owners
+    on owners.id = owner_id and owners.full_name = 'Melody Pond';
 
-SAVEPOINT first_savepoint;
+select * from animals 
+    inner join species
+    on species.id = species_id and species.name = 'Pokemon';
 
-UPDATE animals 
-SET weight_kg = weight_kg * -1;
+select owners.full_name, animals.name from owners
+    left join animals
+    on owners.id = owner_id;
 
-ROLLBACK TO first_savepoint;
+select species.name, count(*) from animals
+join species 
+on species_id = species.id group by species.name;
 
-UPDATE animals 
-SET weight_kg = weight_kg * -1
-WHERE weight_kg < 0;
+SELECT owners.full_name as Owners,animals.name as Animals FROM owners
+  INNER JOIN  species ON  owners.full_name = 'Jennifer Orwell' AND species.name = 'Digimon'
+  INNER JOIN  animals ON owners.id = owner_id AND species.id = species_id;
 
-COMMIT;
+SELECT owners.full_name as Owners,animals.name as Animals FROM owners
+  INNER JOIN  animals ON owners.id = owner_id and owners.full_name = 'Dean Winchester' and escape_attempts = 0;
 
-SELECT COUNT(*) FROM animals;
-
-SELECT COUNT(*) FROM animals
-WHERE escape_attempts > 0;
-
-SELECT AVG(weight_kg) FROM animals;
-
-SELECT neutered , SUM(escape_attempts) FROM animals
-GROUP BY neutered;
-
-SELECT MIN(weight_kg), MAX(weight_kg) FROM animals;
-
-SELECT AVG(escape_attempts) FROM animals
-WHERE date_of_birth BETWEEN '1990-01-01' AND '2000-12-31';
-
+SELECT owners.full_name AS Owners,count(*) FROM owners
+  JOIN  animals ON  owners.id = owner_id
+  GROUP BY Owners ORDER BY count DESC LIMIT 1;
