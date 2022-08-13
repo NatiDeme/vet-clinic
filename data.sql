@@ -1,34 +1,41 @@
 /* Populate database with sample data. */
 
-INSERT INTO owners(full_name, age)
-	VALUES 
-	('Sam Smith', 34),
-	('Jennifer Orwell', 19),
-	('Bob', 45),
-	('Melody Pond', 77),
-	('Dean Winchester', 14),
-	('Jodie Whittaker', 38)
-	;
+INSERT INTO vets (name, age, date_of_graduation )
+VALUES 
+('William Tatcher', 45, '2000-04-23'),
+('Maisy Smith', 26, '2019-01-17');
+('Stephanie Mendez', 64, '1981-05-04'),
+('Jack Harkness', 38, '2008-06-08');
 
-INSERT INTO species(name)
-	VALUES 
-	('Pokemon'),
-	('Digimon')
-	;
+INSERT INTO specializations (vets_id, species_id ) 
+VALUES 
+( 1, 1),
+( 3, 1),
+( 3, 2),
+( 4, 2);
 
-UPDATE animals 
-   SET species_id = 2
-   WHERE name like '%mon';
-
-UPDATE animals 
-    SET species_id = 1
-    WHERE species_id IS NULL;
-
-UPDATE animals SET owner_id = 1 WHERE name = 'Agumon';
-UPDATE animals SET owner_id = 2 WHERE name IN( 'Gabumon', 'Pikachu');
-UPDATE animals SET owner_id = 3 WHERE name IN( 'Devimon', 'Plantmon');
-UPDATE animals SET owner_id = 4 WHERE name IN( 'Charmander', 'Squirtle', 'Blossom');
-UPDATE animals SET owner_id = 5 WHERE name IN( 'Angemon', 'Boarmon');
+INSERT INTO visits (animals_id, vets_id, date_of_visit ) 
+VALUES 
+( 8, 1, '2020-05-24'),
+( 8, 3, '2020-07-22'),
+( 9, 4, '2021-02-02'),
+( 10, 2, '2020-01-05'),
+( 10, 2, '2020-03-08'),
+( 10, 2, '2020-05-14'),
+( 11, 3, '2021-05-04'),
+( 12, 4, '2021-02-24'),
+( 13, 2, '2019-12-21'),
+( 13, 1, '2020-08-10'),
+( 13, 2, '2021-04-07'),
+( 14, 3, '2019-09-29'),
+( 15, 4, '2020-10-03'),
+( 15, 4, '2020-11-04'),
+( 16, 2, '2019-01-24'),
+( 16, 2, '2019-05-15'),
+( 16, 2, '2020-02-27'),
+( 16, 2, '2020-08-03'),
+( 17, 3, '2020-05-24'),
+( 17, 1, '2021-01-11');
 
 
 
